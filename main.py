@@ -19,6 +19,50 @@ def c(color):
   elif color=="pink":
     return ("\033[38;5;206m")
 
+def wordSelection():
+    wordChosen=random.choice(listOfWords)
+
+def text(name):
+  global lang
+  if lang=="eng":
+    print(texts['lang']['eng'][name]
+  else:
+    print(texts['lang']['spa'][name]
+
+def check():
+    global counter
+    global guessedCount
+    global errorCounter
+    print()
+    for i in range(len(guessed)):
+      print(f"{c('pink')}{guessed[i]}", sep="", end="")
+    print()
+    userLetter=input(f"{c('white')}\nType in a letter...\n\n")
+    print()
+    if userLetter not in wordChosenList:
+      print(f"{c('red')}{hangmanpics[errorCounter]}")
+      errorCounter+=1
+      if errorCounter==7:
+        print("Hangman died!")
+        sys.exit("Game finished!")
+    else:
+      for letter in wordChosenList:
+        indexLetter=wordChosenList.index(letter)
+        if userLetter==wordChosenList[counter]:
+          guessed[counter]=userLetter
+          counter+=1
+          guessedCount+=1
+          if guessedCount==wordChosenLen:
+            print("You won!")
+            print(f"The word is: {wordChosen}")
+            sys.exit("Game finished!")
+        else:
+          counter+=1
+      counter=0
+
+texts={}
+texts[eng]={'selection':"You chosed English"}
+
 listOfWordsEng = ('ant baboon badger bat bear beaver camel cat clam cobra cougar '
          'coyote crow deer dog donkey duck eagle ferret fox frog goat '
          'goose hawk lion lizard llama mole monkey moose mouse mule newt '
@@ -85,6 +129,25 @@ hangmanpics = ['''
       |
 =========''']
 
+bigtitle={'eng':"""
+ _                                             
+  | |                                            
+  | |__   __ _ _ __   __ _ _ __ ___   __ _ _ __  
+  | '_ \ / _` | '_ \ / _` | '_ ` _ \ / _` | '_ \ 
+  | | | | (_| | | | | (_| | | | | | | (_| | | | |
+  |_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|
+                      __/ |                      
+                     |___/     
+""", 'spa':"""
+             _                             _       
+     /\   | |                           | |      
+    /  \  | |__   ___  _ __ ___ __ _  __| | ___  
+   / /\ \ | '_ \ / _ \| '__/ __/ _` |/ _` |/ _ \ 
+  / ____ \| | | | (_) | | | (_| (_| | (_| | (_) |
+ /_/    \_\_| |_|\___/|_|  \___\__,_|\__,_|\___/ 
+     
+"""
+
 littleTitle={"es":"""
 
 █████████████████████████████████████████████
@@ -117,30 +180,58 @@ lostMessage={"es":"""
 ░░░╚═╝░░░░╚════╝░░╚═════╝░  ╚══════╝░╚════╝░╚═════╝░╚══════╝╚═╝
 """}
 
-lang=int(input("""Choose language / Elige lenguaje:
+notsupported=f'''
 
-1. English / Inglés
-2. Spanish / Español
+{text(notsupportedtext)}
+ ___________.._______
+| .__________))______|
+| | / /      ||
+| |/ /       ||
+| | /        ||.-''.
+| |/         |/  _  \
+| |          ||  `/,|
+| |          (\\`_.'
+| |         .-`--'.
+| |        /Y . . Y\
+| |       // |   | \\
+| |      //  | . |  \\
+| |     ')   |   |   (`
+| |          ||'||
+| |          || ||
+| |          || ||
+| |          || ||
+| |         / | | \
+""""""""""|_`-' `-' |"""|
+|"|"""""""\ \       '"|"|
+| |        \ \        | |
+: :         \ \       : :  
+. .          `'       . .
 
-Write the number/Escribe el número... 
+'''
+
+# Text dictionaries
+lang='lang'
+eng={'langsel':'You chosed English', 'difficulty':'Choose the difficulty: ', 'notsupportedtext':'Not supported'}
+spa={'langsel':'Elegiste español', 'difficulty':'Elige la dificultad: ', 'notsupportedtext':'No soportado'}
+texts={}
+texts[lang]={'eng':eng, 'spa':spa}
+
+lang=int(input("""Choose language number / Elige lenguaje:
+
+1. English
+2. Español
+
 """))
 
 if lang==1:
-  print("You have choosen english...") 
-  print(f"""{c("pink")}
-   _                                             
-  | |                                            
-  | |__   __ _ _ __   __ _ _ __ ___   __ _ _ __  
-  | '_ \ / _` | '_ \ / _` | '_ ` _ \ / _` | '_ \ 
-  | | | | (_| | | | | (_| | | | | | | (_| | | | |
-  |_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|
-                      __/ |                      
-                     |___/     
-  """)
+  lang="eng"
+else:
+  lang="spa"
+
+  print(texts['lang']['eng']['langsel']) 
+  print(f"{c("pink")}{bigtitle['eng']}")
 
   listOfWords=listOfWordsEng
-  def wordSelection():
-    wordChosen=random.choice(listOfWords)
 
   wordSelection()
   wordChosenList=[]
@@ -158,52 +249,12 @@ if lang==1:
   for letter in wordChosen:
     wordChosenList.append(letter)
   
-  def check():
-    global counter
-    global guessedCount
-    global errorCounter
-    print()
-    for i in range(len(guessed)):
-      print(f"{c('pink')}{guessed[i]}", sep="", end="")
-    print()
-    userLetter=input(f"{c('white')}\nType in a letter...\n\n")
-    print()
-    if userLetter not in wordChosenList:
-      print(f"{c('red')}{hangmanpics[errorCounter]}")
-      errorCounter+=1
-      if errorCounter==7:
-        print("Hangman died!")
-        sys.exit("Game finished!")
-    else:
-      for letter in wordChosenList:
-        indexLetter=wordChosenList.index(letter)
-        if userLetter==wordChosenList[counter]:
-          guessed[counter]=userLetter
-          counter+=1
-          guessedCount+=1
-          if guessedCount==wordChosenLen:
-            print("You won!")
-            print(f"The word is: {wordChosen}")
-            sys.exit("Game finished!")
-        else:
-          counter+=1
-      counter=0
-  
   while remaining>0:
     remaining-=1
     check()
 elif lang==2:
   print("Has elegido español...")
-  titleSpa="""
-             _                             _       
-     /\   | |                           | |      
-    /  \  | |__   ___  _ __ ___ __ _  __| | ___  
-   / /\ \ | '_ \ / _ \| '__/ __/ _` |/ _` |/ _ \ 
-  / ____ \| | | | (_) | | | (_| (_| | (_| | (_) |
- /_/    \_\_| |_|\___/|_|  \___\__,_|\__,_|\___/ 
-                                          
-  """
-  print(f"""{c("pink")}{titleSpa}""")  
+  print(f"""{c("pink")}{bigtitle['spa']}""")  
   difficulty=int(input("Elige la dificultad:\n\n1. Fácil\n2.Medio\n3.Difícil\n4.Elegir palabra manualmente\n\n)")
   if difficulty==1:
     listOfWords=listOfWordsSpaE
@@ -268,30 +319,4 @@ elif lang==2:
     remaining-=1
     check()
 else:
-  print("""
-  Not supported/No soportado
- ___________.._______
-| .__________))______|
-| | / /      ||
-| |/ /       ||
-| | /        ||.-''.
-| |/         |/  _  \
-| |          ||  `/,|
-| |          (\\`_.'
-| |         .-`--'.
-| |        /Y . . Y\
-| |       // |   | \\
-| |      //  | . |  \\
-| |     ')   |   |   (`
-| |          ||'||
-| |          || ||
-| |          || ||
-| |          || ||
-| |         / | | \
-""""""""""|_`-' `-' |"""|
-|"|"""""""\ \       '"|"|
-| |        \ \        | |
-: :         \ \       : :  
-. .          `'       . .
-  
-  """)
+  print(notsupported)
