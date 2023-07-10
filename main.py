@@ -18,7 +18,7 @@ scaffold='''
 '''
 
 hangmanpics=[
-'''
+  '''
   +---+
   |   |
       |
@@ -99,7 +99,6 @@ youLooseASCI={'es':'''
 ██║░░░░░███████╗██║░░██║██████╔╝██║██████╔╝░░░██║░░░███████╗██╗
 ╚═╝░░░░░╚══════╝╚═╝░░╚═╝╚═════╝░╚═╝╚═════╝░░░░╚═╝░░░╚══════╝╚═╝
 ''', 'en':"""
-
 ██╗░░░██╗░█████╗░██╗░░░██╗  ██╗░░░░░░█████╗░░█████╗░░██████╗███████╗██╗
 ╚██╗░██╔╝██╔══██╗██║░░░██║  ██║░░░░░██╔══██╗██╔══██╗██╔════╝██╔════╝██║
 ░╚████╔╝░██║░░██║██║░░░██║  ██║░░░░░██║░░██║██║░░██║╚█████╗░█████╗░░██║
@@ -121,7 +120,6 @@ youLooseASCI={'es':'''
 }
 
 youWinASCI={'es':'''
-
 ░██████╗░░█████╗░███╗░░██╗░█████╗░░██████╗████████╗███████╗██╗
 ██╔════╝░██╔══██╗████╗░██║██╔══██╗██╔════╝╚══██╔══╝██╔════╝██║
 ██║░░██╗░███████║██╔██╗██║███████║╚█████╗░░░░██║░░░█████╗░░██║
@@ -135,10 +133,10 @@ youWinASCI={'es':'''
 ░░╚██╔╝░░██║░░██║██║░░░██║  ░░████╔═████║░██║░░██║██║╚████║╚═╝
 ░░░██║░░░╚█████╔╝╚██████╔╝  ░░╚██╔╝░╚██╔╝░╚█████╔╝██║░╚███║██╗
 ░░░╚═╝░░░░╚════╝░░╚═════╝░  ░░░╚═╝░░░╚═╝░░░╚════╝░╚═╝░░╚══╝╚═╝
-''', 'es_xs':'''
+''', 'es_s':'''
 █▀▀ ▄▀█ █▄░█ ▄▀█ █▀ ▀█▀ █▀▀
 █▄█ █▀█ █░▀█ █▀█ ▄█ ░█░ ██▄
-''', 'en_xs':'''
+''', 'en_s':'''
 █▄█ █▀█ █░█   █░█░█ █▀█ █▄░█ █
 ░█░ █▄█ █▄█   ▀▄▀▄▀ █▄█ █░▀█ ▄
 ''', 'es_xs':'''
@@ -192,15 +190,14 @@ def asciSize():
   global terminal_size
   global size
   terminal_size=os.get_terminal_size()
-  print(terminal_size[0])
   if terminal_size[0]>=72:
-    pass
+    size=lan
   elif terminal_size[0]>=31 and terminal_size[0]<72:
     size=f'{lan}_s'
   else:
     terminal_size[0]<31
     size=f'{lan}_xs'
-  return size
+    return size
 
 def c(color):
   if color=="red":
@@ -249,9 +246,11 @@ def check():
     global guessedCount
     global errorCounter
     global remaining
+    asciSize()
     print()
     for i in range(len(guessed)):
       print(guessed[i], sep="", end="")
+    print()
     print()
     txts('input')
     userLetter=input().lower()
@@ -259,10 +258,13 @@ def check():
     print()
     if userLetter not in wordLetters:
       remaining-=1
+      print()
       print(f"{c('red')}{littleTitle[size]}")
       print(hangmanpics[errorCounter])
       errorCounter+=1
+      print()
       txts('error')
+      print()
       if errorCounter==1:
         txts('error1')
       elif errorCounter==2:
@@ -276,17 +278,16 @@ def check():
       elif errorCounter==6:
         txts('error6')
       elif errorCounter==7:
+        print()
         txts('error7')
         print(youLooseASCI[size])
         txts('word')
         print(chosenWord)
+        print()
     else:
-      if errorCounter==0 or counter==0:
-        print(f"{c('green')}{littleTitle[size]}")
-        print(f"{c('green')}{scaffold}")
-      else:
-        print(f"{c('green')}{littleTitle[size]}")
-        print(f"{c('green')}{hangmanpics[errorCounter]}")
+      print()
+      print(f"{c('green')}{littleTitle[size]}")
+      print(f"{c('green')}{hangmanpics[errorCounter]}")
       for letter in wordLetters:
         indexLetter=wordLetters.index(letter)
         if userLetter==wordLetters[counter]:
@@ -296,7 +297,8 @@ def check():
           if guessedCount==chosenWordLen:
             print(youWinASCI[size])
             print()
-            print(f"The word is: {chosenWord}")
+            print(f"The word is:\n{chosenWord}")
+            print()
         else:
           counter+=1
       counter=0
@@ -318,7 +320,7 @@ en={
   'error7':'Hangman has died ☠',
   'wordinput':"Write the word you want to use and press enter (You won't be able to see it):\n",
   'input':'Type in a letter...\n\n',
-  'repeat':'Play again? Press "y" for yes or any other key to exit...',
+  'repeat':'Play again? Press "y" for yes...\nOr any other key to exit...',
   'exit':'Bay! Hangman awaits for you 😔',
   'word':'The word was: '
 }
@@ -372,14 +374,22 @@ txts('lanSel')
 while True:
   os.system("clear")
   asciSize()
-  print(f"{c('purple')}{littleTitle[size]}")  
+  print(f"{c('purple')}")
+  print()
+  for letter in littleTitle[size]:
+    sys.stdout.write(letter)
+    time.sleep(.003)  
+  print()
   txts('difficulty')
   difficulty=int(input(""))
   wSel(difficulty)
   os.system("clear")
+  print()
+  print()
   for letter in littleTitle[size]:
     sys.stdout.write(letter)
-    time.sleep(.005)
+    time.sleep(.003)
+  print()
   print(f"{c('purple')}{hangmanpics[errorCounter]}")
   chosenWordLen=len(chosenWord)
   for letter in range(chosenWordLen):
