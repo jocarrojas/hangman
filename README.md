@@ -139,11 +139,15 @@ Distributed under The Unlicense License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-<!--Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - --!>
-Jonathan Cardona Rojas - threeyedinosaur@proton.me
+<!--Your Name - [@twitter_handle](https://twitter.com/twitter_handle) --!>
+<p>Jonathan Cardona Rojas - threeyedinosaur@proton.me
 
-Project Link: [github.com/jocarrojas/hangman](https://github.com/jocarrojas/hangman)]
-Replit Link: [replit.com/@jocarrojas/hangman](https://replit.com/@jocarrojas/hangman)
+<p>
+Project Link: 
+(https://github.com/jocarrojas/hangman)]
+<p>
+Replit Link: 
+(https://replit.com/@jocarrojas/hangman)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
