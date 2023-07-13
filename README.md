@@ -173,7 +173,7 @@ Replit Link: [replit.com/@jocarrojas/hangman](https://replit.com/@jocarrojas/han
 [issues-shield]: https://img.shields.io/github/issues/jocarrojas/hangman.svg?style=for-the-badge
 [issues-url]: https://github.com/jocarrojas/hangman/issues
 [license-shield]: https://img.shields.io/github/license/jocarrojas/hangman.svg?style=for-the-badge
-[license-url]: https://github.com/jocarrojas/hangman/blob/master/LICENSE.txt
+[license-url]: https://github.com/jocarrojas/hangman/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/jocarrojas
 [product-screenshot]: 3.PNG
