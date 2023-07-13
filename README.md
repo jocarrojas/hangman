@@ -104,8 +104,6 @@ To run locally you'll need:
 
 - [Python ](https://www.python.org/ftp/python/3.11.4/python-3.11.4-amd64.exe)
 
-   ```
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
