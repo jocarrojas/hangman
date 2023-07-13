@@ -83,7 +83,6 @@ Juego del ahorcado con tres opciones de dificultad, miles de palabras incluidas 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
 #
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -126,7 +125,6 @@ Don't forget to give the project a star! Thanks again!
 5. Open a Pull Request
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- LICENSE -->
